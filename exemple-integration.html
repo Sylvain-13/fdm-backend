@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Démonstration d'intégration — API Fondation Denis Maugenest</title>
+<style>
+  body{font-family:system-ui,Segoe UI,Roboto,sans-serif;background:#FCFAF7;color:#2B1212;margin:0;padding:0 18px}
+  .wrap{max-width:1240px;margin:0 auto;padding:40px 0}
+  h1{color:#990103}h2{margin-top:48px;border-bottom:1px solid #EDE4DE;padding-bottom:8px}
+  .grille3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+  .grille4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:22px}
+  .partenaires{display:flex;flex-wrap:wrap;gap:30px;align-items:center;padding:20px 0}
+  form.bloc{background:#fff;border:1px solid #EDE4DE;border-radius:20px;padding:26px;max-width:560px}
+  label{display:block;font-size:13px;font-weight:600;margin:12px 0 6px;color:#5C4442}
+  input,textarea{width:100%;padding:11px 13px;border:1px solid #EDE4DE;border-radius:10px;font-size:14px;background:#FCFAF7;box-sizing:border-box}
+  button{margin-top:16px;padding:12px 26px;border:0;border-radius:999px;background:linear-gradient(180deg,#A80406,#8A0103);color:#fff;font-weight:700;cursor:pointer}
+  .note{background:#FBF2F2;border:1px solid #F0D9D9;border-radius:12px;padding:14px 18px;font-size:13.5px;color:#7A2E2E}
+  @media(max-width:820px){.grille3,.grille4{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Démonstration d'intégration</h1>
+  <p class="note">Cette page n'est pas le site final : elle montre que le <b>backend PHP/MySQL</b> alimente
+     réellement un front via l'API, et sert de <b>patron</b> à reporter dans la maquette. Les actualités,
+     événements et partenaires ci-dessous proviennent de la base de données. Les formulaires envoient vraiment vers l'API.</p>
+
+  <h2>Dernières actualités</h2>
+  <div id="actus" class="grille3"></div>
+
+  <h2>Événements</h2>
+  <div id="events" class="grille4"></div>
+
+  <h2>Partenaires</h2>
+  <div id="partenaires" class="partenaires"></div>
+
+  <h2>Formulaire de contact (envoi réel vers l'API)</h2>
+  <form class="bloc" data-fdm="contact" novalidate>
+    <label>Nom *</label><input type="text" name="nom" required>
+    <label>E-mail *</label><input type="email" name="email" required>
+    <label>Objet</label><input type="text" name="objet">
+    <label>Message *</label><textarea name="message" required></textarea>
+    <!-- champ piège anti-spam : laissé caché et vide -->
+    <input type="text" name="site" style="display:none" tabindex="-1" autocomplete="off">
+    <button type="submit">Envoyer</button>
+  </form>
+
+  <h2>Newsletter</h2>
+  <form class="bloc" data-fdm="newsletter" novalidate style="max-width:420px">
+    <label>Votre e-mail</label><input type="email" name="email" required>
+    <button type="submit">S'abonner</button>
+  </form>
+</div>
+
+<!-- Si l'API n'est pas à <origine>/api, décommentez et adaptez :
+<script>window.FDM_BASE = '/fdm/api';</script> -->
+<script src="assets/fdm-api.js"></script>
+<script>
+  // Rendu des listes à partir de l'API
+  FDM.actualites({ par_page: 6 }).then(function (d) { FDM.rendreActualites('#actus', d.items); });
+  FDM.evenements({ par_page: 8 }).then(function (d) { FDM.rendreEvenements('#events', d.items); });
+  FDM.partenaires().then(function (d) { FDM.rendrePartenaires('#partenaires', d.items); });
+</script>
+</body>
+</html>
