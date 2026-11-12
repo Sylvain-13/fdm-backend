@@ -15,11 +15,11 @@
 --     >>> SE CONNECTER PUIS CHANGER CE MOT DE PASSE IMMÉDIATEMENT <<<
 -- =====================================================================
 
-CREATE DATABASE IF NOT EXISTS `fdm`
+CREATE DATABASE IF NOT EXISTS `railway`
   DEFAULT CHARACTER SET utf8mb4
   DEFAULT COLLATE utf8mb4_unicode_ci;
 
-USE `fdm`;
+USE `railway`;
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
