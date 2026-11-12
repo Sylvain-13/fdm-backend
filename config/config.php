@@ -6,9 +6,9 @@ return [
     'db' => [
         'host'    => env('MYSQLHOST',     env('DB_HOST', '127.0.0.1')),
         'port'    => (int) env('MYSQLPORT', env('DB_PORT', '3306')),
-        'name'    => env('MYSQLDATABASE', env('DB_NAME', 'fdm')),
+        'name'    => env('MYSQLDATABASE', env('DB_NAME', 'railway')),
         'user'    => env('MYSQLUSER',     env('DB_USER', 'root')),
-        'pass'    => env('MYSQLPASSWORD', env('DB_PASS', '')),
+        'pass'    => env('MYSQLPASSWORD', env('DB_PASS', 'vserDwzzqlGzVQWPGaMAgJAiixXynUNW')),
         'charset' => 'utf8mb4',
         'socket'  => '',
     ],
